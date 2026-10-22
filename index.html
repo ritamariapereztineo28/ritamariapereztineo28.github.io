@@ -202,7 +202,7 @@ const DATOS = {
   pie:       "</> Rita Pérez · 2026",
   enlaces: [
     { texto: "LinkedIn",     url: "https://www.linkedin.com/in/rita-perez-6147251a0/" },
-    { texto: "Descargar CV", url: "https://canva.link/rieqoi1w727qn2j" },
+    { texto: "Descargar CV", url: "cv/CV-Rita-Perez.pdf", descarga: "CV-Rita-Perez.pdf" },
     { texto: "Contacto",     url: "mailto:ritamariapereztineo@gmail.com", principal: true }
   ]
 };
@@ -220,7 +220,8 @@ DATOS.enlaces.forEach((e, i) => {
   const a = document.createElement("a");
   a.className = "btn rise" + (e.principal ? " primary" : "");
   a.href = e.url;
-  if (!e.url.startsWith("mailto:")) { a.target = "_blank"; a.rel = "noopener"; }
+  if (e.descarga) a.download = e.descarga;
+  else if (!e.url.startsWith("mailto:")) { a.target = "_blank"; a.rel = "noopener"; }
   a.style.animationDelay = (1.6 + i * 0.15) + "s";
   a.innerHTML = `<span class="n">0${i + 1}</span><span></span><span class="arrow">→</span>`;
   a.children[1].textContent = e.texto;

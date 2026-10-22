@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rita Pérez · Software & Web Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* ========= EDITA AQUÍ LOS COLORES ========= */
+  :root {
+    --fondo:      #1D2D44;
+    --acero:      #3E5C76;
+    --gris:       #8AA9C4;
+    --hielo:      #C9DCE8;
+    --claro:      #EAF2F8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--fondo); }
+  body {
+    min-height: 100vh;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
+    color: var(--claro);
+    display: flex; justify-content: center;
+    overflow-x: hidden;
+  }
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  .card {
+    position: relative;
+    width: 100%; max-width: 440px; min-width: 0;
+    padding: 28px 28px 40px;
+    overflow: hidden;
+  }
+
+  /* ---------- Panel diagonal ---------- */
+  .diag, .stripe {
+    position: absolute; top: 0; right: 0; height: 280px;
+    transform: translateX(110%);
+    animation: slideIn 1s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+  .diag   { width: 150px; background: var(--acero); clip-path: polygon(46% 0, 100% 0, 100% 100%, 0 100%); }
+  .stripe { width: 190px; background: var(--gris); opacity: .55;
+            clip-path: polygon(88% 0, 91% 0, 3% 100%, 0 100%); animation-delay: .15s; }
+  @keyframes slideIn { to { transform: translateX(0); } }
+
+  /* ---------- Entrada escalonada ---------- */
+  .rise { opacity: 0; transform: translateY(18px); animation: rise .7s ease forwards; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+
+  .pill {
+    position: relative; display: inline-flex; align-items: center; gap: 8px;
+    background: var(--acero); color: var(--hielo);
+    font-size: 12px; padding: 6px 14px; border-radius: 999px;
+  }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: #7CE0A7; position: relative; }
+  .dot::after {
+    content: ""; position: absolute; inset: 0; border-radius: 50%; background: inherit;
+    animation: ping 1.8s ease-out infinite;
+  }
+  @keyframes ping { to { transform: scale(2.8); opacity: 0; } }
+
+  h1 {
+    position: relative;
+    font-size: clamp(44px, 13vw, 54px); line-height: 1; font-weight: 700;
+    letter-spacing: -1px; margin-top: 22px;
+  }
+  .role { position: relative; margin-top: 14px; font-weight: 700; font-size: 18px; color: var(--hielo); }
+  .edu  { position: relative; margin-top: 4px; font-size: 15px; color: var(--gris); }
+
+  /* ---------- Pista de circuito que se dibuja ---------- */
+  .circuit { position: relative; z-index: 1; display: block; width: 100%; height: 34px; margin-top: 10px; overflow: visible; }
+  .circuit path {
+    fill: none; stroke: var(--gris); stroke-width: 1.5;
+    stroke-dasharray: 400; stroke-dashoffset: 400;
+    animation: draw 1.4s ease forwards .9s;
+  }
+  .circuit circle { fill: var(--gris); opacity: 0; animation: fadeIn .3s forwards 2.2s; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .phrase { margin-top: 26px; font-size: 22px; line-height: 1.3; }
+
+  /* ---------- Bloque de código tipo máquina de escribir ---------- */
+  .code {
+    margin-top: 26px; padding: 16px 18px;
+    background: rgba(62, 92, 118, .45);
+    border-left: 4px solid var(--hielo); border-radius: 0 12px 12px 0;
+    font-size: clamp(11px, 3.1vw, 13px); line-height: 1.55; color: var(--hielo);
+    min-height: 98px; white-space: pre-wrap; overflow-wrap: anywhere;
+  }
+  .code .k { color: var(--gris); }
+  .code .s { color: var(--claro); }
+  .cursor { display: inline-block; width: 7px; height: 14px; background: var(--hielo);
+            vertical-align: -2px; animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ---------- Botones ---------- */
+  .links { margin-top: 30px; display: grid; gap: 14px; }
+  .btn {
+    display: flex; align-items: center; gap: 18px;
+    padding: 17px 20px; border-radius: 12px;
+    background: var(--acero); color: var(--claro);
+    font-weight: 700; font-size: 17px; text-decoration: none;
+    transition: transform .25s ease, background .25s ease;
+  }
+  .btn .n { font-family: 'JetBrains Mono', monospace; font-weight: 500; font-size: 14px; color: var(--hielo); }
+  .btn .arrow { margin-left: auto; transition: transform .25s ease; }
+  .btn:hover, .btn:focus-visible { transform: translateY(-3px); background: #4A6B88; outline: none; }
+  .btn:hover .arrow, .btn:focus-visible .arrow { transform: translateX(6px); }
+  .btn.primary { background: var(--claro); color: var(--fondo); }
+  .btn.primary .n { color: var(--acero); }
+  .btn.primary:hover { background: #ffffff; }
+
+  /* ---------- Pie ---------- */
+  .rule { margin-top: 40px; height: 1px; background: var(--acero); }
+  .circuit.bottom path { stroke: var(--acero); animation-delay: 2.6s; }
+  .circuit.bottom circle { fill: var(--acero); animation-delay: 3.8s; }
+  footer { margin-top: 24px; font-size: 13px; color: var(--gris); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: .01s !important; animation-delay: 0s !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="diag" aria-hidden="true"></div>
+  <div class="stripe" aria-hidden="true"></div>
+
+  <span class="pill rise" style="animation-delay:.3s"><span class="dot"></span><span id="status"></span></span>
+
+  <h1 class="rise" style="animation-delay:.45s" id="name"></h1>
+  <p class="role rise" style="animation-delay:.6s" id="role"></p>
+  <p class="edu rise"  style="animation-delay:.7s" id="edu"></p>
+
+  <svg class="circuit" viewBox="0 0 300 34" aria-hidden="true">
+    <path d="M0 30 H190 L218 6 H292"/><circle cx="294" cy="6" r="4"/>
+  </svg>
+
+  <p class="phrase rise" style="animation-delay:1s" id="phrase"></p>
+
+  <pre class="code mono rise" style="animation-delay:1.2s" aria-label="Stack"><span id="typed"></span><span class="cursor"></span></pre>
+
+  <nav class="links" id="links"></nav>
+
+  <div class="rule"></div>
+  <svg class="circuit bottom" viewBox="0 0 300 34" aria-hidden="true">
+    <path d="M300 4 H130 L100 30 H8"/><circle cx="6" cy="30" r="4"/>
+  </svg>
+  <footer class="mono" id="footer"></footer>
+</main>
+
+<script>
+/* =====================================================
+   EDITA AQUÍ TU INFORMACIÓN
+   Cambia los textos y pega tus enlaces reales.
+   ===================================================== */
+const DATOS = {
+  estado:    "Disponible para proyectos",
+  nombre:    "Rita<br>Pérez",
+  rol:       "Software & Web Developer",
+  formacion: "Ingeniería en Sistemas",
+  frase:     "Turning ideas into digital experiences.",
+  stack:     ["Shopify", "JS", "React", "TS"],
+  pie:       "</> Rita Pérez · 2026",
+  enlaces: [
+    { texto: "LinkedIn",     url: "https://www.linkedin.com/in/rita-perez-6147251a0/" },
+    { texto: "Descargar CV", url: "https://canva.link/rieqoi1w727qn2j" },
+    { texto: "Contacto",     url: "mailto:ritamariapereztineo@gmail.com", principal: true }
+  ]
+};
+/* ===================================================== */
+
+const $ = id => document.getElementById(id);
+$("status").textContent = DATOS.estado;
+$("name").innerHTML     = DATOS.nombre;
+$("role").textContent   = DATOS.rol;
+$("edu").textContent    = DATOS.formacion;
+$("phrase").textContent = DATOS.frase;
+$("footer").textContent = DATOS.pie;
+
+DATOS.enlaces.forEach((e, i) => {
+  const a = document.createElement("a");
+  a.className = "btn rise" + (e.principal ? " primary" : "");
+  a.href = e.url;
+  if (!e.url.startsWith("mailto:")) { a.target = "_blank"; a.rel = "noopener"; }
+  a.style.animationDelay = (1.6 + i * 0.15) + "s";
+  a.innerHTML = `<span class="n">0${i + 1}</span><span></span><span class="arrow">→</span>`;
+  a.children[1].textContent = e.texto;
+  $("links").appendChild(a);
+});
+
+/* Efecto máquina de escribir en el bloque de código */
+const parts = [
+  ["k", "const "], ["s", "Rita"], ["", " = {\n  role: "], ["s", `"${DATOS.rol.replace("Software & ", "")}"`],
+  ["", ",\n  stack: ["], ["s", DATOS.stack.map(t => `"${t}"`).join(", ")], ["", "]\n};"]
+];
+const typed = $("typed");
+let p = 0, c = 0;
+function type() {
+  if (p >= parts.length) return;
+  const [cls, txt] = parts[p];
+  let span = typed.lastElementChild;
+  if (c === 0) { span = document.createElement("span"); if (cls) span.className = cls; typed.appendChild(span); }
+  span.textContent += txt[c++];
+  if (c >= txt.length) { p++; c = 0; }
+  setTimeout(type, 28);
+}
+setTimeout(type, 1500);
+</script>
+</body>
+</html>

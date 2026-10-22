@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tarjeta de Rita Pérez · Software & Web Developer</title>
+<meta name="description" content="Páginas web, tiendas en línea y soluciones digitales a la medida.">
+<meta property="og:title" content="Rita Pérez · Software & Web Developer">
+<meta property="og:description" content="Páginas web, tiendas en línea y soluciones digitales a la medida.">
+<meta property="og:image" content="https://ritamariapereztineo28.github.io/tarjeta/post-rita-perez.png">
+<meta property="og:url" content="https://ritamariapereztineo28.github.io/tarjeta/">
+<meta name="twitter:card" content="summary_large_image">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root { --fondo:#1D2D44; --acero:#3E5C76; --gris:#8AA9C4; --hielo:#C9DCE8; --claro:#EAF2F8; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { min-height: 100vh; background: var(--fondo); color: var(--claro); font-family: 'Space Grotesk', sans-serif;
+         display: flex; align-items: center; justify-content: center; padding: 32px 18px; }
+  main { width: 100%; max-width: 760px; text-align: center; }
+  h1 { font-family: 'DM Serif Display', serif; font-weight: 400; font-size: clamp(30px, 7vw, 44px); }
+  p  { color: var(--hielo); margin-top: 8px; }
+  .card { margin: 28px auto 0; width: 100%; border-radius: 14px; box-shadow: 0 24px 50px rgba(0,0,0,.35);
+          opacity: 0; transform: translateY(24px) rotate(-1.5deg); animation: in .9s cubic-bezier(.2,.8,.2,1) .2s forwards; }
+  @keyframes in { to { opacity: 1; transform: none; } }
+  .actions { margin-top: 28px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  a { text-decoration: none; font-weight: 700; padding: 14px 22px; border-radius: 12px; transition: transform .2s; }
+  a:hover { transform: translateY(-2px); }
+  .primary { background: var(--claro); color: var(--fondo); }
+  .ghost { background: var(--acero); color: var(--claro); }
+</style>
+</head>
+<body>
+<main>
+  <h1>Rita Pérez</h1>
+  <p>Software &amp; Web Developer · Ingeniería en Sistemas</p>
+  <img class="card" src="tarjeta-rita-perez.webp" alt="Tarjeta de presentación de Rita Pérez">
+  <div class="actions">
+    <a class="primary" href="../">Ver mi tarjeta digital →</a>
+    <a class="ghost" href="mailto:ritamariapereztineo@gmail.com">Escríbeme</a>
+    <a class="ghost" href="tarjeta-rita-perez.webp" download>Descargar tarjeta</a>
+  </div>
+</main>
+</body>
+</html>

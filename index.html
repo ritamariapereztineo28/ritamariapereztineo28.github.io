@@ -164,7 +164,6 @@ const DATOS = {
   rol:       "Software & Web Developer",
   formacion: "Ingeniería en Sistemas",
   frase:     "Turning ideas into digital experiences.",
-  stack:     ["Shopify", "JS", "React", "TS"],
   pie:       "</> Rita Pérez · 2026",
   enlaces: [
     { texto: "LinkedIn",     url: "https://www.linkedin.com/in/rita-perez-6147251a0/" },
@@ -196,7 +195,7 @@ DATOS.enlaces.forEach((e, i) => {
 /* Efecto máquina de escribir en el bloque de código */
 const parts = [
   ["k", "const "], ["s", "Rita"], ["", " = {\n  role: "], ["s", `"${DATOS.rol.replace("Software & ", "")}"`],
-  ["", ",\n  stack: ["], ["s", DATOS.stack.map(t => `"${t}"`).join(", ")], ["", "]\n};"]
+  ["", ",\n  focus: "], ["s", '"Webs y apps a la medida"'], ["", "\n};"]
 ];
 const typed = $("typed");
 let p = 0, c = 0;
